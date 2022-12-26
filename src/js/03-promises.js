@@ -10,14 +10,11 @@ function createPromise(position, delay) {
 import Notiflix from 'notiflix';
 import 'notiflix/dist/notiflix-3.2.5.min.css';
 
-
-
 const form = document.querySelector('.form');
 
 const firstDelayMs = document.querySelector('[name="delay"]');
 const delayStepMs = document.querySelector('[name="step"]');
 const amount = document.querySelector('[name="amount"]');
-
 
 
 form.addEventListener('submit', submitCreatePromises);
