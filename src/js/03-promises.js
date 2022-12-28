@@ -16,9 +16,14 @@ function onFormSubmit(e) {
   
 
   for (let position = 1; position <= amountOfPromise; position += 1) {
-    createPromise(position, mainDelay);
+    createPromise(position, mainDelay).then(({ position, delay }) => {
+      Notiflix.Notify.success(`✅ Fulfilled promise ${position} in ${delay}ms`);
+    }).catch(({ position, delay }) => {
+      Notiflix.Notify.failure(`❌ Rejected promise ${position} in ${delay}ms`);
+    });;
     mainDelay += delayStep;
   };
+  refs.form.reset()
 }
 
 function createPromise(position, delay) {
@@ -34,9 +39,6 @@ function createPromise(position, delay) {
     }, delay);
   });
 
-  promise.then(({ position, delay }) => {
-      Notiflix.Notify.success(`✅ Fulfilled promise ${position} in ${delay}ms`);
-    }).catch(({ position, delay }) => {
-      Notiflix.Notify.failure(`❌ Rejected promise ${position} in ${delay}ms`);
-    });
+  return promise;
 }
+
